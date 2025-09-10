@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Product</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <h1><a href="/index.html">Eddy's Market</a></h1>
+      </nav>
+      <nav id="nav-buttons">
+        <a href="/add.html" class="button" id="add-product-button">✏️</a>
+        <a href="/cart.html" class="button" id="add-cart-button">🛒</a>
+        <a
+          href="/login.html"
+          class="button"
+          id="logout-button"
+          onclick="logout()"
+          >↪️</a
+        >
+      </nav>
+    </header>
+
+    <main id="addProductContainer" class="add-product-container">
+      <section class="add-product-card">
+        <h2>Add New Product</h2>
+        <form id="addProductForm" onsubmit="addProduct(event)" novalidate>
+          <div class="form-group">
+            <label for="title">Product Title</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" step="0.01" required />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="productCategory">Category</label>
+            <select name="category" id="productCategory" required>
+              <option value="mens_clothing">Men's Clothing</option>
+              <option value="womens_clothing">Women's Clothing</option>
+              <option value="jewelery">Jewelery</option>
+              <option value="electronics">Electronics</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="imageURL">Image URL</label>
+            <input type="url" id="imageURL" name="image-url" required />
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <input
+              type="number"
+              id="rating"
+              name="rating"
+              min="0"
+              max="5"
+              step="0.1"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="ratingCount">Rating Count</label>
+            <input
+              type="number"
+              id="ratingCount"
+              name="rating-count"
+              min="0"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <button type="submit" id="addProductButton">Add Product</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="js/login.js" async></script>
+    <script src="js/add.js" async></script>
+  </body>
+</html>

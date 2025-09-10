@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="css/cart_page_styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <h1><a href="/index.html">Eddy's Market</a></h1>
+      </nav>
+      <nav id="nav-buttons">
+        <a href="/add.html" class="button" id="add-product-button">✏️</a>
+        <a href="/cart.html" class="button" id="add-cart-button">🛒</a>
+        <a
+          href="/login.html"
+          class="button"
+          id="logout-button"
+          onclick="logout()"
+          >↪️</a
+        >
+      </nav>
+    </header>
+
+    <main id="cartContainer" class="cart-container">
+      <section class="cart-items" id="cartItems"></section>
+      <section class="cart-summary">
+        <h2>Order Summary</h2>
+        <p id="totalPrice">Total: $0.00</p>
+      </section>
+    </main>
+
+    <script src="js/login.js" async></script>
+    <script src="js/cart.js" async></script>
+  </body>
+</html>

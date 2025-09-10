@@ -1,0 +1,121 @@
+:root {
+  --primary-color: #1D2F6F;
+  --border-color: #ddd;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --hover-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --button-bg: #00b0ff;
+  --edit-button-bg: #66bb6a;
+  --delete-button-bg: #f44336;
+  --button-hover-color: #ffcc33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+}
+
+header .button {
+  background: var(--button-bg);
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: large;
+  transition: background-color 0.3s;
+}
+
+header .button:hover {
+  background-color: var(--button-hover-color);
+}
+
+
+/* Product Details Styling */
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.product-detail-card {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: var(--box-shadow);
+  width: 90%;
+  text-align: center;
+}
+
+.product-detail-card img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 16px;
+}
+
+.product-detail-card h2 {
+  margin: 16px 0;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.product-detail-card p {
+  margin: 8px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.product-detail-card .price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #69f0ae;
+  margin-top: 12px;
+}
+
+.product-detail-card .rating {
+  font-size: 1rem;
+  color: #ffcc00;
+  margin: 8px 0;
+}
+
+.product-detail-card button {
+  width: fit-content;
+  background-color: var(--button-bg);
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+  color: white;
+}
+
+.edit-product-button:hover {
+  background-color: #00e676;
+}
+
+.delete-product-button:hover {
+  background-color: #ff1744;
+}

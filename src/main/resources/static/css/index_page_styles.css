@@ -1,0 +1,341 @@
+:root {
+  --primary-color: #1D2F6F;
+  --border-color: #ddd;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --hover-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --button-bg: #00b0ff;
+  --edit-button-bg: #66bb6a;
+  --delete-button-bg: #f44336;
+  --button-hover-color: #ffcc33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header Styling (Navbar) */
+header {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+}
+
+header .button {
+  background: var(--button-bg);
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: large;
+  transition: background-color 0.3s;
+}
+
+header .button:hover {
+  background-color: var(--button-hover-color);
+}
+
+#title-logo {
+    margin-left: 15px;
+}
+
+#productContainer {
+  display: grid;
+  background-color: #FFFFFF;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 24px;
+}
+
+#search-bar {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+#searchForm {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+#searchInput {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 1.2rem;
+  flex: 1;
+}
+
+#searchForm button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-left: none;
+  background-color: var(--button-bg);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0 4px 4px 0;
+  transition: background-color 0.3s;
+}
+
+#searchForm button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.hamburger-menu-container {
+    display: grid;
+    align-items: center;
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#hamburger-menu-icon-container {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hamburger-menu {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+}
+
+.hamburger-menu-container p {
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+}
+
+.hamburger-menu-container:hover p {
+    color: #ffcc33;
+}
+
+.profile-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: 4px;
+    margin: 0 10px 0 10px;
+}
+
+.profile-container p {
+    color: white;
+    margin: 0;
+    font-size: 12px;
+}
+
+#profile-pic-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid #00b0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+#profile-pic-container img {
+    width: 85%;
+    height: 85%;
+    object-fit: cover;
+}
+
+#nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: 4px;
+    margin: 0 10px 0 10px;
+
+}
+.icon-container {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-container img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+}
+
+.button-container p {
+    color: white;
+    margin: 0;
+    font-size: 12px;
+}
+
+.button-container:hover p {
+ color: #ffcc33;
+}
+
+/* Product Card Styling */
+.product-card {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-box-shadow);
+}
+
+.product-card img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.product-card a {
+  text-decoration: none;
+  color: black;
+}
+
+.product-card p {
+    margin-top: auto;
+}
+
+.product-card-buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  gap: 8px;
+  margin-top: 0px;
+}
+
+.add-to-cart-button {
+  width: 100%;
+  background-color: #00b0ff;
+  color: #FFFFFF;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+}
+
+.add-to-cart-button:hover {
+  background-color: #ffcc33;
+}
+
+/* Sidebar Menu Styles */
+/* Hidden sidebar positioned off-screen to the left */
+#side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden off-screen */
+  width: 250px;
+  height: 100vh;
+  background-color: var(--primary-color);
+  transition: left 0.3s ease; /* Smooth slide animation */
+  z-index: 1000; /* Above other content */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Visible state - slides menu into view */
+#side-menu.side-menu-visible {
+  left: 0; /* Moves to visible position */
+}
+
+/* Header section of the side menu */
+#side-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+#side-menu-header h2 {
+    color: white;
+    text-align: center;
+    padding: 20px 0px 20px 32px;
+    margin: 0;
+}
+
+#close-side-menu-icon.icon-container {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#close-side-menu-icon:hover {
+    opacity: 0.7;
+}
+
+/* Container for menu navigation links */
+.side-menu-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Individual menu link styling */
+.side-menu-content a {
+  color: white;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+/* Hover effect for menu links */
+.side-menu-content a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark overlay behind menu when open */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; /* Below menu but above content */
+  display: none; /* Hidden by default */
+}
+
+/* Show overlay when menu is active */
+.menu-overlay.active {
+  display: block;
+}

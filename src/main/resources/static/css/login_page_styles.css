@@ -1,0 +1,128 @@
+:root {
+  --primary-color: #1D2F6F;
+  --border-color: #ddd;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --hover-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --button-bg: #00b0ff;
+  --edit-button-bg: #66bb6a;
+  --delete-button-bg: #f44336;
+  --button-hover-color: #ffcc33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+}
+
+header .button {
+  background: var(--button-bg);
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: large;
+  transition: background-color 0.3s;
+}
+
+header .button:hover {
+  background-color: var(--button-hover-color);
+}
+
+
+/* Login Form Styling */
+.login-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+}
+
+.login-card {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 500px;
+}
+
+.login-card h2 {
+  margin-bottom: 0;
+}
+
+.login-card h3 {
+  font-weight: lighter;
+  margin-top: 0;
+  color: #969696;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.form-group input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #495057;
+  border-radius: 4px;
+  outline: none;
+}
+
+#loginButton {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--button-bg);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#loginButton:hover {
+  background-color: #0078cc;
+}
+
+#error-message-user, #error-message-pass {
+  display: none;
+  color: red;
+  margin: 5px 0px 0px 0px;
+  font-size: 0.7rem;
+}
+
+#error-invalid-container {
+  display: none;
+  margin: 10px 0px 10px 0px;
+  padding: 5px;
+  background-color: #FFE6E6;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-align: center;
+}

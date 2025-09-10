@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/login_page_styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <h1><a href="/index.html">Eddy's Market | Login</a></h1>
+      </nav>
+    </header>
+
+    <main id="loginContainer" class="login-container">
+      <section class="login-card">
+        <h2>Welcome</h2>
+        <h3>Sign in to your account.</h3>
+        <div id="error-invalid-container">
+            <p id="error-message-invalid">That username and password combination didn't work. Try again.</p>
+        </div>
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+            <p id="error-message-user">Username is required</p>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+              <p id="error-message-pass">Password is required</p>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" id="loginButton">Login</button>
+          </div>
+
+          <hr />
+
+          <p>New User? Register <a href="/register.html">here</a></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="js/login.js" async></script>
+  </body>
+</html>
