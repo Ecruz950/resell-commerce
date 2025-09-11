@@ -117,6 +117,11 @@ async function removeFromCart(productId) {
 
 // Initialize the cart page
 window.addEventListener("load", () => {
+    // Display the username in the navbar
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    document.getElementById("username-display").textContent = user.username;
+    // Show "Add Product" button if the user is an admin
     showAddProductButton();
+    // Fetch and display cart items
     fetchCartItems();
 });

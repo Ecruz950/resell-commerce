@@ -14,27 +14,100 @@
   </head>
 
   <body>
+    <!-- Overlay that appears behind sidebar menu when open -->
+    <div id="menu-overlay" class="menu-overlay"></div>
     <header>
-      <nav>
-        <h1><a href="/index.html">Eddy's Market</a></h1>
+      <div class="hamburger-menu-container">
+        <div id="hamburger-menu-icon-container">
+          <img id="hamburger-menu" src="/images/hamburger-menu.png" alt="Menu">
+        </div>
+        <p>Menu</p>
+      </div>
+      <!-- Sidebar menu container -->
+      <div id="side-menu" class="side-menu-hidden">
+        <div id="side-menu-header">
+          <h2>Menu</h2>
+          <div class="icon-container" id="close-side-menu-icon">
+            <img src="/images/x-icon.png" alt="Close Menu">
+          </div>
+        </div>
+        <!-- Menu navigation links -->
+        <div class="side-menu-content">
+          <a href="/index.html" class="side-menu-content-container">
+            <div class="icon-container">
+              <img src="images/clothes-icon.png" alt="">
+            </div>
+            <p>Shop</p>
+          </a>
+          <a href="/add.html" class="side-menu-content-container add-product-button">
+            <div class="icon-container">
+              <img src="images/inventory-icon.png" alt="">
+            </div>
+            <p>Add Product</p>
+          </a>
+          <a href="/cart.html" class="side-menu-content-container">
+            <div class="icon-container">
+              <img src="images/cart.png" alt="">
+            </div>
+            <p>Cart</p>
+          </a>
+          <a href="/login.html" class="side-menu-content-container">
+            <div class="icon-container">
+              <img src="images/logout-icon02.png" alt="">
+            </div>
+            <p>Logout</p>
+          </a>
+        </div>
+      </div>
+      <nav class="title-logo-container">
+        <h1 id="title-logo"><a href="/index.html">Eddy's Market</a></h1>
       </nav>
       <nav id="nav-buttons">
-        <a href="/add.html" class="button" id="add-product-button">✏️</a>
-        <a href="/cart.html" class="button" id="add-cart-button">🛒</a>
+        <div class="profile-container">
+          <div id="profile-pic-container">
+            <img src="/images/head-profile-pic.png" alt="">
+          </div>
+          <div id="username-container">
+            <p id="username-display"></p>
+          </div>
+        </div>
+
+        <a href="/add.html"
+           class="button-container add-product-button"
+           aria-label="Add Product"
+        >
+          <div class="icon-container">
+            <img src="images/inventory-icon.png" alt="">
+          </div>
+          <p>Add</p>
+        </a>
+        <a href="/cart.html"
+           class="button-container"
+           aria-label="View Cart"
+        >
+          <div class="icon-container">
+            <img src="images/cart.png" alt="">
+          </div>
+          <p>Cart</p>
+        </a>
+
         <a
           href="/login.html"
-          class="button"
-          id="logout-button"
-          onclick="logout()"
-          >↪️</a
+          class="button-container"
+          aria-label="Logout"
         >
+          <div class="icon-container">
+            <img src="images/logout-icon02.png" alt="">
+          </div>
+          <p>Logout</p>
+        </a>
       </nav>
     </header>
 
     <main id="productDetailsContainer" class="product-detail-container">
       <section class="product-detail-card" id="productDetails"></section>
     </main>
-
+    <script src="js/sidebar.js"></script>
     <script src="js/login.js" async></script>
     <script src="js/product.js" async></script>
   </body>

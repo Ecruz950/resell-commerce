@@ -23,7 +23,7 @@ body, html {
 header {
   background-color: var(--primary-color);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -48,6 +48,118 @@ header .button:hover {
   background-color: var(--button-hover-color);
 }
 
+/* Navbar Elements Styling */
+#title-logo {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+/* Hamburger Menu styling */
+.hamburger-menu-container {
+    display: grid;
+    align-items: center;
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#hamburger-menu-icon-container {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hamburger-menu {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+}
+
+.hamburger-menu-container p {
+    margin: 0;
+    font-size: 12px;
+    text-align: center;
+}
+
+.hamburger-menu-container:hover p {
+    color: #ffcc33;
+}
+
+/* Profile Picture Styling */
+.profile-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: 4px;
+    margin: 0 10px 0 10px;
+}
+
+.profile-container p {
+    color: white;
+    margin: 0;
+    font-size: 12px;
+}
+
+#profile-pic-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid #00b0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+#profile-pic-container img {
+    width: 85%;
+    height: 85%;
+    object-fit: cover;
+}
+
+/* Navigation Buttons Styling (Icons) */
+#nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.button-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: 4px;
+    margin: 0 10px 0 10px;
+
+}
+.icon-container {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-container img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+}
+
+.button-container p {
+    color: white;
+    margin: 0;
+    font-size: 12px;
+}
+
+.button-container:hover p {
+ color: #ffcc33;
+}
 
 /* Product Details Styling */
 .product-detail-container {
@@ -118,4 +230,92 @@ header .button:hover {
 
 .delete-product-button:hover {
   background-color: #ff1744;
+}
+
+/* Sidebar Menu Styles */
+/* Hidden sidebar positioned off-screen to the left */
+#side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden off-screen */
+  width: 250px;
+  height: 100vh;
+  background-color: var(--primary-color);
+  transition: left 0.3s ease; /* Smooth slide animation */
+  z-index: 1000; /* Above other content */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Visible state - slides menu into view */
+#side-menu.side-menu-visible {
+  left: 0; /* Moves to visible position */
+}
+
+/* Header section of the side menu */
+#side-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+#side-menu-header h2 {
+    color: white;
+    text-align: center;
+    padding: 20px 0px 20px 32px;
+    margin: 0;
+}
+
+#close-side-menu-icon.icon-container {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#close-side-menu-icon:hover {
+    opacity: 0.7;
+}
+
+/* Container for menu navigation links */
+.side-menu-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual menu link styling */
+.side-menu-content-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.side-menu-content-container p {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  margin: auto auto auto 15px;
+}
+
+/* Hover effect for menu links */
+.side-menu-content-container:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark overlay behind menu when open */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999; /* Below menu but above content */
+  display: none; /* Hidden by default */
+}
+
+/* Show overlay when menu is active */
+.menu-overlay.active {
+  display: block;
 }

@@ -82,7 +82,9 @@ window.addEventListener("load", () => {
 //    const addProductButton = document.getElementById("add-product-button");
     if (addProductButton[0] && addProductButton[1]) {
 //        addProductButton.style.display = isAdminLoggedIn() ? "inline" : "none";
-        addProductButton[0].style.display = isAdminLoggedIn() ? "inline" : "none";
+        // Side-menu add product button
+        addProductButton[0].style.display = isAdminLoggedIn() ? "flex" : "none";
+        // Navbar add product button
         addProductButton[1].style.display = isAdminLoggedIn() ? "inline" : "none";
     }
 

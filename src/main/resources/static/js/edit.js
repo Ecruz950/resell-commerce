@@ -2,6 +2,10 @@ const PRODUCTS_API_URL = "http://localhost:8080/api/v1/products";
 const productId = new URLSearchParams(window.location.search).get("id");
 
 window.addEventListener("load", () => {
+    // Display the username in the navbar
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    document.getElementById("username-display").textContent = user.username;
+
     if (productId) fetchProductForEdit(productId);
 
     document.getElementById("editProductForm").addEventListener("submit", event => {

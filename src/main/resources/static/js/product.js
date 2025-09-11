@@ -10,6 +10,10 @@ function isAdminLoggedIn() {
 }
 
 window.addEventListener("load", () => {
+  // Display the username in the navbar
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  document.getElementById("username-display").textContent = user.username;
+
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
 

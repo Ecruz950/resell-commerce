@@ -31,5 +31,9 @@ async function addProduct(event) {
 }
 
 window.addEventListener("load", () => {
+    // Display the username in the navbar
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    document.getElementById("username-display").textContent = user.username;
+
     document.getElementById("addProductForm").addEventListener("submit", addProduct);
 });

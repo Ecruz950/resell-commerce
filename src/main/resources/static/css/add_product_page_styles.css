@@ -47,6 +47,7 @@ header .button:hover {
   background-color: var(--button-hover-color);
 }
 
+
 /* Navbar Elements Styling */
 #title-logo {
     margin-left: 15px;
@@ -160,97 +161,63 @@ header .button:hover {
  color: #ffcc33;
 }
 
-/* Cart Page Styling */
-.cart-container {
+/* Add Product Form Styling */
+.add-product-container {
   display: flex;
-  justify-content: space-between;
-  padding: 16px;
-  gap: 16px;
+  justify-content: center;
+  margin: 16px;
 }
 
-.cart-items {
-  flex: 2;
+.add-product-card {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  margin-bottom: 16px;
 }
 
-.cart-item {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 16px;
-  box-shadow: var(--box-shadow);
+.form-group label {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
 }
 
-.cart-item img {
-  max-width: 100px;
-  max-height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-right: 16px;
-}
-
-.cart-item-info {
-  flex: 1;
-  margin-left: 16px;
-}
-
-.cart-item-info h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: var(--primary-color);
-}
-
-.cart-item-info p {
-  margin: 4px 0;
-  color: #333;
-}
-
-.cart-item-quantity {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.cart-item-quantity input {
-  width: 50px;
-  padding: 4px;
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 10px;
   font-size: 1rem;
-  text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid #495057;
   border-radius: 4px;
+  outline: none;
 }
 
-.cart-item-price {
-  font-size: 1.1rem;
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+#addProductButton {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--button-bg);
+  color: white;
+  cursor: pointer;
   font-weight: bold;
-  color: #ff5722;
+  transition: background-color 0.3s;
 }
 
-.cart-summary {
-  flex: 1;
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 24px;
-  box-shadow: var(--box-shadow);
-  text-align: center;
-  height: fit-content;
-}
-
-.cart-summary h2 {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-}
-
-.cart-summary p {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 16px 0;
+#addProductButton:hover {
+  background-color: #0078cc;
 }
 
 /* Sidebar Menu Styles */
