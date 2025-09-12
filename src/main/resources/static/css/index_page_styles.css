@@ -351,3 +351,39 @@ header .button:hover {
 .menu-overlay.active {
   display: block;
 }
+
+/* Responsive Design - Media Queries */
+/* For screens 768px and below */
+@media (max-width: 768px) {
+  #productContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  #nav-buttons {
+    display: none;
+  }
+}
+
+/* For screens 480px and below */
+@media (max-width: 480px) {
+  #productContainer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  #title-logo {
+    font-size: clamp(16px, 4vw, 24px);
+  }
+
+  #searchInput {
+    font-size: 1rem;
+    padding: 6px;
+  }
+
+  #searchForm button {
+    padding: 5px 12px;
+  }
+}

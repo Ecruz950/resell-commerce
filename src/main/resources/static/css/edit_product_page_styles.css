@@ -334,3 +334,18 @@ textarea {
 .menu-overlay.active {
   display: block;
 }
+
+/* Responsive Design - Media Queries */
+/* For screens 768px and below */
+@media (max-width: 768px) {
+  #nav-buttons {
+    display: none;
+  }
+}
+
+/* For screens 480px and below */
+@media (max-width: 480px) {
+  #title-logo {
+    font-size: clamp(16px, 4vw, 24px);
+  }
+}
