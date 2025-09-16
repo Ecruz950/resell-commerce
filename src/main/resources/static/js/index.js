@@ -33,14 +33,6 @@ async function addToCart(productId) {
 }
 
 window.addEventListener("load", () => {
-  if (!isLoggedIn()) {
-    window.location.href = "login.html";
-    return;
-  }
-  // Display the username in the navbar
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  document.getElementById("username-display").textContent = user.username;
-
   // Fetch products from the API when the page loads
   fetchProducts();
 

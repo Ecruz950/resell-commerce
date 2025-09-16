@@ -24,3 +24,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+window.addEventListener("load", () => {
+      if(isLoggedIn()) {
+        // Navbar adjustments for when the user is not logged in
+        // Attach the logout function to the logout button if it exists
+        const navLogoutLoginButton = document.getElementById("nav-logout-login-button");
+        if (navLogoutLoginButton) { // Check if element exists to prevent errors
+            navLogoutLoginButton.addEventListener("click", logout);
+        }
+        // Display the username in the navbar if they are logged in and if the element exists
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const usernameDisplay = document.getElementById("username-display");
+        if (usernameDisplay) { // Check if element exists to prevent errors
+            usernameDisplay.textContent = user.username;
+        }
+
+        // Side-Menu adjustments for when the user is logged in
+        // Attach the logout function to the side-menu logout button if it exists
+        const sideMenuLogoutLoginButton = document.getElementById("side-menu-logout-login-button");
+        if (sideMenuLogoutLoginButton){ // Check if element exists to prevent errors
+            sideMenuLogoutLoginButton.addEventListener("click", logout);
+        }
+      } else {
+        // Navbar adjustments for when the user is not logged in
+        // If not logged in, set the username display to "Sign In" if it exists
+        const usernameDisplay = document.getElementById("username-display");
+        if (usernameDisplay) { // Check if element exists to prevent errors
+            usernameDisplay.textContent = "Guest";
+        }
+        // set the href attribute of the profile button to point to login.html if it exists
+        const profileButton = document.getElementById("profile-button");
+        if (profileButton) { // Check if element exists to prevent errors
+            profileButton.setAttribute("href", "login.html");
+        }
+        // change the logout button text to "Login" if it exists
+        const navLogoutLoginText = document.getElementById("nav-logout-login-text");
+        if (navLogoutLoginText) { // Check if element exists to prevent errors
+            navLogoutLoginText.textContent = "Login";
+        }
+
+        // Side-Menu adjustments for when the user is not logged in
+        // change the side-menu logout button text to "Login" if it exists
+        const sideMenuLogoutLoginText = document.getElementById("side-menu-logout-login-text");
+        if (sideMenuLogoutLoginText) { // Check if element exists to prevent errors
+            sideMenuLogoutLoginText.textContent = "Login";
+        }
+        // change account button display style to "none" if it exists
+        const accountButton = document.getElementById("account-button");
+        if (accountButton) { // Check if element exists to prevent errors
+            accountButton.style.display = "none";
+        }
+      }
+}
+);

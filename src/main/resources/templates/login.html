@@ -14,7 +14,45 @@
   </head>
 
   <body>
+    <!-- Overlay that appears behind sidebar menu when open -->
+    <div id="menu-overlay" class="menu-overlay"></div>
     <header>
+        <div class="hamburger-menu-container">
+            <div id="hamburger-menu-icon-container">
+                <img id="hamburger-menu" src="/images/hamburger-menu.png" alt="Menu">
+            </div>
+            <p>Menu</p>
+        </div>
+        <!-- Sidebar menu container -->
+        <div id="side-menu" class="side-menu-hidden">
+            <div id="side-menu-header">
+                <h2>Menu</h2>
+                <div class="icon-container" id="close-side-menu-icon">
+                    <img src="/images/x-icon.png" alt="Close Menu">
+                </div>
+            </div>
+            <!-- Menu navigation links -->
+            <div class="side-menu-content">
+                <a href="/index.html" class="side-menu-content-container">
+                    <div class="icon-container">
+                        <img src="images/clothes-icon.png" alt="">
+                    </div>
+                    <p>Shop</p>
+                </a>
+                <a href="/add.html" class="side-menu-content-container add-product-button">
+                    <div class="icon-container">
+                        <img src="images/inventory-icon.png" alt="">
+                    </div>
+                    <p>Add Product</p>
+                </a>
+                <a href="/cart.html" class="side-menu-content-container">
+                    <div class="icon-container">
+                        <img src="images/cart.png" alt="">
+                    </div>
+                    <p>Cart</p>
+                </a>
+            </div>
+        </div>
       <nav>
         <h1><a href="/index.html">Eddy's Market | Login</a></h1>
       </nav>
@@ -50,7 +88,7 @@
         </form>
       </section>
     </main>
-
+    <script src="js/sidebar.js"></script>
     <script src="js/login.js" async></script>
   </body>
 </html>

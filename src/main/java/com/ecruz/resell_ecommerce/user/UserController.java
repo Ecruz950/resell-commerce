@@ -37,4 +37,15 @@ public class UserController {
 				ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 						.body("Login failed");
 	}
+
+    @PostMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        System.out.println("Received user for update: " + user);
+        User updatedUser = userService.updateUser(user);
+        if (updatedUser != null) {
+            return ResponseEntity.ok("User password updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
 }

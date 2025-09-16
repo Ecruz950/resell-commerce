@@ -53,9 +53,8 @@ async function login(event) {
             return;
         }
         const responseData = await response.json();
-        // console.log("Login successful:", responseData);
         // Store userID, username, and role in sessionStorage
-        sessionStorage.setItem("user", JSON.stringify({userID: responseData.userID, username, role: responseData.role}))
+        sessionStorage.setItem("user", JSON.stringify({userID: responseData.userID, username, password, role: responseData.role}))
         window.location.href = "index.html";
     } catch (error) {
         alert(error.message);
@@ -68,7 +67,6 @@ function isLoggedIn() {
 
 function isAdminLoggedIn() {
     const user = JSON.parse(sessionStorage.getItem("user") || "{}");
-    console.log("User from sessionStorage:", user);
     return isLoggedIn() && user.role === "ADMIN";
 }
 
@@ -78,14 +76,33 @@ function logout() {
 }
 
 window.addEventListener("load", () => {
-    const addProductButton = document.getElementsByClassName("add-product-button");
-//    const addProductButton = document.getElementById("add-product-button");
-    if (addProductButton[0] && addProductButton[1]) {
-//        addProductButton.style.display = isAdminLoggedIn() ? "inline" : "none";
+    const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+    console.log("User from sessionStorage:", user);
+    console.log("Login status:", isLoggedIn());
+    // redirect user if they are already logged in and trying to access login.html or register.html
+    console.log("Current URL:", window.location.href);
+    if ((window.location.href.includes("login.html") || window.location.href.includes("register.html")) && isLoggedIn()) {
+        window.location.href = "index.html";
+        return;
+    }
+    // redirect user if they are not an admin and trying to access add.html or edit.html
+    if ((window.location.href.includes("add.html") || window.location.href.includes("edit.html")) && !isAdminLoggedIn()) {
+        window.location.href = "index.html";
+        return;
+    }
+    // redirect user if they are not logged in and trying to access cart.html, user.html, add.html, or edit.html
+    if ((window.location.href.includes("cart.html") || window.location.href.includes("user.html") || window.location.href.includes("add.html") || window.location.href.includes("edit.html")) && !isLoggedIn()) {
+        window.location.href = "login.html";
+        return;
+    }
+    const addProductButtons = document.getElementsByClassName("add-product-button");
+    if (addProductButtons[0]) {
         // Side-menu add product button
-        addProductButton[0].style.display = isAdminLoggedIn() ? "flex" : "none";
+        addProductButtons[0].style.display = isAdminLoggedIn() ? "flex" : "none";
+    }
+    if (addProductButtons[1]) {
         // Navbar add product button
-        addProductButton[1].style.display = isAdminLoggedIn() ? "inline" : "none";
+        addProductButtons[1].style.display = isAdminLoggedIn() ? "inline" : "none";
     }
 
     // Add event listener to the login form
@@ -95,11 +112,11 @@ window.addEventListener("load", () => {
     }
 
     // Add event listener for the logout button
-    const logoutButton = document.getElementById("logout-button");
-    if (logoutButton) {
-        logoutButton.addEventListener("click", (event) => {
-            event.preventDefault();
-            logout();
-        });
-    }
+//    const logoutButton = document.getElementById("logout-button");
+//    if (logoutButton) {
+//        logoutButton.addEventListener("click", (event) => {
+//            event.preventDefault();
+//            logout();
+//        });
+//    }
 });
