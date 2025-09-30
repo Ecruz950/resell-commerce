@@ -88,11 +88,12 @@ async function registerUser(event) {
             })
         })
         if(!response.ok){
-            throw new Error("Registration failed!");
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
         }
-        // If registration is successful, display a success alert and redirect the user to the login.html page
+        // If registration is successful, display a success alert and redirect the user to the login page
         alert("Registration successful");
-        window.location.href = "login.html";
+        window.location.href = "/login";
 
     } catch (error) {
         alert(error.message);

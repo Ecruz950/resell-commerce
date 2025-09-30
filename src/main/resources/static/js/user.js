@@ -1,12 +1,6 @@
 const UPDATE_API_URL = "http://localhost:8080/user/update";
 
-// Check if the user is logged in and show "Add Product" button if the user is an admin
-function showAddProductButton() {
-    const navButton = document.getElementById("add-product-button");
-    if (navButton) {
-        navButton.style.display = isAdminLoggedIn() ? "inline" : "none";
-    }
-}
+
 
 // Toggle password visibility
 function togglePassword(inputId) {
@@ -26,14 +20,27 @@ function togglePassword(inputId) {
 }
 
 async function updateUser(event) {
-    // Use event.preventDefault() to prevent the default action from being executed
     event.preventDefault();
 
-    // Get the username and password from session storage
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const userID = user.userID;
-    const username = user.username;
-    var password = user.password;
+    // Get user info from Spring Security
+    let userID, username;
+    try {
+        const authResponse = await fetch('/api/auth/status');
+        const authData = await authResponse.json();
+        
+        if (!authData.authenticated) {
+            alert('Please log in to update password');
+            window.location.href = '/login';
+            return;
+        }
+        
+        userID = authData.userId;
+        username = authData.username;
+    } catch (error) {
+        alert('Please log in to update password');
+        window.location.href = '/login';
+        return;
+    }
 
     // Get the current password and new password from the input fields
     var currentPassword = document.getElementById("current-password").value;
@@ -42,12 +49,11 @@ async function updateUser(event) {
     // Make sure current password and new password are not empty
     if(!currentPassword || !newPassword){
         if(!currentPassword){
-        // error message element
             const currPassErrorMessageElement = document.getElementById("error-message-curr-pass");
-            passErrorMessageElement.style.display = "inline";
-            // Change input border color to red
+            currPassErrorMessageElement.style.display = "inline";
             const passInputElement = document.getElementById("current-password");
-            passInputElement.style.borderColor = "red";}
+            passInputElement.style.borderColor = "red";
+        }
         if(!newPassword){
             const newPassErrorMessageElement = document.getElementById("error-message-new-pass");
             newPassErrorMessageElement.style.display = "inline";
@@ -57,40 +63,29 @@ async function updateUser(event) {
         return;
     }
 
-    console.log("Current Password:", currentPassword);
-    console.log("Password in Session Storage:", password);
-    // Check if the current password matches the password in session storage
-    if(currentPassword !== password){
-        // Display error message
-        const errorMessageElement = document.getElementById("error-message");
-        errorMessageElement.textContent = "Current password is incorrect.";
-        const errorMessageContainer = document.getElementById("error-message-container");
-        errorMessageContainer.style.display = "block";
-        // Change input border color to red
-        const passInputElement = document.getElementById("current-password");
-        passInputElement.style.borderColor = "red";
-        return;
-    }
-    password = newPassword;
+    // Note: Current password validation should be done server-side with Spring Security
+    // For now, we'll send the request and let the server handle validation
     try {
-        // Create a POST request to UPDATE_API_URL to send the user data { username, password, role: "USER" }
+        // Create a POST request to UPDATE_API_URL to send current and new passwords
         const response = await fetch(UPDATE_API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json"},
+            credentials: "same-origin",
             body: JSON.stringify({
                 id: userID,
                 username,
-                password
+                currentPassword: currentPassword,
+                newPassword: newPassword
             })
         })
         if(!response.ok){
             throw new Error("Update failed!");
         }
-        // If update is successful, display a success alert and redirect the user to the login.html page
-        alert("Update successful");
-        // Update the password in session storage
-        sessionStorage.setItem("user", JSON.stringify({userID, username, password, role: user.role}))
-        window.location.href = "user.html";
+        // If update is successful, display a success alert
+        alert("Password updated successfully");
+        // Clear form
+        document.getElementById("current-password").value = "";
+        document.getElementById("new-password").value = "";
 
     } catch (error) {
         alert(error.message);
@@ -98,15 +93,8 @@ async function updateUser(event) {
     }
 }
 
-// Initialize the cart page
+// Initialize the user page
 window.addEventListener("load", () => {
-    // Display the username in the navbar
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    // document.getElementById("username-display").textContent = user.username;
-    const usernameDisplays = document.getElementsByClassName("username-display");
-    Array.from(usernameDisplays).forEach(element => {
-        element.textContent = user.username;
-    });
-    // Show "Add Product" button if the user is an admin
-    showAddProductButton();
+    // Add event listener to prevent duplicate form submission
+    document.getElementById("updateForm").addEventListener("submit", updateUser);
 });

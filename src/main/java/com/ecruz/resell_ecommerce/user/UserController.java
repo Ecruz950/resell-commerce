@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -20,32 +22,30 @@ public class UserController {
 
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody User user) {
-		userService.createUser(user);
-		return ResponseEntity.ok("User registered successfully");
+		try {
+			userService.createUser(user);
+			return ResponseEntity.ok("User registered successfully");
+		} catch (RuntimeException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody User user) {
-
-		User userByUsername = userService.getUserByUsername(user.getUsername());
-
-		boolean isAuthenticated = userService.authenticate(user);
-		return isAuthenticated ?
-				ResponseEntity.status(HttpStatus.OK)
-                        // .body(String.valueOf(userByUsername.getId())) :
-						.body("{\"userID\":" + userByUsername.getId() + ",\"role\":\"" + userByUsername.getRole() + "\"}") :
-				ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-						.body("Login failed");
-	}
+//    REMOVED: Manual login endpoint - Spring Security now handles form-based authentication
+//    Login is now handled by Spring Security's /login endpoint with form submission
 
     @PostMapping("/update")
-    public ResponseEntity<String> updateUser(@RequestBody User user) {
-        System.out.println("Received user for update: " + user);
-        User updatedUser = userService.updateUser(user);
-        if (updatedUser != null) {
-            return ResponseEntity.ok("User password updated successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    public ResponseEntity<String> updateUser(@RequestBody Map<String, Object> request) {
+        try {
+            Long userId = Long.valueOf(request.get("id").toString());
+            String currentPassword = request.get("currentPassword").toString();
+            String newPassword = request.get("newPassword").toString();
+            
+            userService.updatePassword(userId, currentPassword, newPassword);
+            return ResponseEntity.ok("Password updated successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Update failed");
         }
     }
 }

@@ -1,12 +1,23 @@
 const PRODUCTS_API_URL = "http://localhost:8080/api/v1/products";
 
-function isLoggedIn() {
-  return Boolean(sessionStorage.getItem("user"));
+async function isLoggedIn() {
+  try {
+    const response = await fetch('/api/auth/status');
+    const data = await response.json();
+    return data.authenticated;
+  } catch (error) {
+    return false;
+  }
 }
 
-function isAdminLoggedIn() {
-  const user = JSON.parse(sessionStorage.getItem("user") || "{}");
-  return isLoggedIn() && user.role === "ADMIN";
+async function isAdminLoggedIn() {
+  try {
+    const response = await fetch('/api/auth/status');
+    const data = await response.json();
+    return data.authenticated && data.isAdmin;
+  } catch (error) {
+    return false;
+  }
 }
 
 window.addEventListener("load", () => {
@@ -29,7 +40,8 @@ async function fetchProduct(productId) {
   }
 }
 
-function displayProduct(product) {
+async function displayProduct(product) {
+  const isAdmin = await isAdminLoggedIn();
   const productContainer = document.getElementById("productDetailsContainer");
   productContainer.innerHTML = `
       <div class="product-detail-card">
@@ -40,7 +52,7 @@ function displayProduct(product) {
         <p><strong>Category:</strong> ${product.category}</p>
         <p class="rating"><strong>Rating:</strong> ${product.rating.rate} (Count: ${product.rating.count})</p>
         <div class="product-card-buttons-container" id="product-card-buttons">
-          ${isAdminLoggedIn() ? `
+          ${isAdmin ? `
             <button class="product-card-button edit-product-button" onclick="editProduct(${product.id})">✏️ Edit</button>
             <button class="product-card-button delete-product-button" onclick="deleteProduct(${product.id})">🗑️ Delete</button>
           ` : ''}
@@ -50,7 +62,7 @@ function displayProduct(product) {
 }
 
 function editProduct(productId) {
-  window.location.href = `edit.html?id=${productId}`;
+  window.location.href = `/edit?id=${productId}`;
 }
 
 async function deleteProduct(productId) {
@@ -61,7 +73,7 @@ async function deleteProduct(productId) {
     if (!response.ok) throw new Error(`Error deleting product with ID: ${productId}`);
 
     alert("Product deleted successfully.");
-    window.location.href = "index.html";
+    window.location.href = "/";
   } catch (error) {
     console.error(error);
     alert("Error deleting product. Please try again later.");

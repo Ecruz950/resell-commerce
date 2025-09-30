@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,25 +33,25 @@
         </div>
         <!-- Menu navigation links -->
         <div class="side-menu-content">
-          <a href="/index.html" class="side-menu-content-container">
+          <a href="/" class="side-menu-content-container">
             <div class="icon-container">
               <img src="images/clothes-icon.png" alt="">
             </div>
             <p>Shop</p>
           </a>
-          <a href="/add.html" class="side-menu-content-container add-product-button">
+          <a href="/add" class="side-menu-content-container add-product-button" sec:authorize="hasRole('ADMIN')">
             <div class="icon-container">
               <img src="images/inventory-icon.png" alt="">
             </div>
             <p>Add Product</p>
           </a>
-          <a href="/cart.html" class="side-menu-content-container">
+          <a href="/cart" class="side-menu-content-container" sec:authorize="isAuthenticated()">
             <div class="icon-container">
               <img src="images/cart.png" alt="">
             </div>
             <p>Cart</p>
           </a>
-          <a href="/login.html" class="side-menu-content-container">
+          <a href="/logout" class="side-menu-content-container" sec:authorize="isAuthenticated()">
             <div class="icon-container">
               <img src="images/logout-icon.png" alt="">
             </div>
@@ -61,30 +61,32 @@
       </div>
 
       <nav class="title-logo-container">
-        <h1 id="title-logo"><a href="/index.html">Eddy's Market</a></h1>
+        <h1 id="title-logo"><a href="/">Eddy's Market</a></h1>
       </nav>
       <nav id="nav-buttons">
-        <div class="profile-container">
+        <div class="profile-container" sec:authorize="isAuthenticated()">
           <div id="profile-pic-container">
             <img src="/images/head-profile-pic.png" alt="">
           </div>
           <div id="username-container">
-            <p id="username-display"></p>
+            <p id="username-display" sec:authentication="name"></p>
           </div>
         </div>
 
-        <a href="/add.html"
+        <a href="/add"
            class="button-container add-product-button"
            aria-label="Add Product"
+           sec:authorize="hasRole('ADMIN')"
         >
           <div class="icon-container">
             <img src="images/inventory-icon.png" alt="">
           </div>
           <p>Add</p>
         </a>
-        <a href="/cart.html"
+        <a href="/cart"
            class="button-container"
            aria-label="View Cart"
+           sec:authorize="isAuthenticated()"
         >
           <div class="icon-container">
             <img src="images/cart.png" alt="">
@@ -93,9 +95,10 @@
         </a>
 
         <a
-          href="/login.html"
+          href="/logout"
           class="button-container"
           aria-label="Logout"
+          sec:authorize="isAuthenticated()"
         >
           <div class="icon-container">
             <img src="images/logout-icon.png" alt="">
@@ -108,7 +111,7 @@
     <main id="editProductContainer" class="edit-product-container">
       <section class="edit-product-card">
         <h2>Edit Product</h2>
-        <form id="editProductForm" onsubmit="updateProduct(event)" novalidate>
+        <form id="editProductForm" novalidate>
           <div class="form-group">
             <label for="title">Product Title</label>
             <input type="text" id="title" name="title" required />

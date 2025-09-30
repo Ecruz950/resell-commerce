@@ -4,8 +4,24 @@ let products = [];
 let filteredProducts = []; // Add this to store filtered products
 
 async function addToCart(productId) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const userId = user.userID;
+  // Check if user is logged in and get user ID from Spring Security
+  let userId;
+  try {
+    const authResponse = await fetch('/api/auth/status');
+    const authData = await authResponse.json();
+    
+    if (!authData.authenticated) {
+      alert('Please log in to add items to cart');
+      window.location.href = '/login';
+      return;
+    }
+    
+    userId = authData.userId;
+  } catch (error) {
+    alert('Please log in to add items to cart');
+    window.location.href = '/login';
+    return;
+  }
 
   const cart = {
     userId: userId,
@@ -77,7 +93,7 @@ function renderProducts(productList = products) {
   const container = document.getElementById("productContainer");
   container.innerHTML = productList.map(product => `
       <div class="product-card">
-        <a href="product.html?id=${product.id}">
+        <a href="/product?id=${product.id}">
           <img src="${product.image}" alt="${product.title}" />
           <p>${product.title}</p>
         </a>
