@@ -55,6 +55,7 @@ window.addEventListener("load", () => {
   // Add an event listener to the searchForm to handle form submissions. Prevent the default submission behavior
   document.getElementById("searchForm").addEventListener("submit", (event) => {
     event.preventDefault();
+    document.getElementById("error-message-container").style.display = "none"; // Hide error message container on new search
 
     // Retrieve the search query from the searchInput field, and convert it to lowercase for a case-insensitive search
     const query = document.getElementById("searchInput").value.trim().toLowerCase();
@@ -65,6 +66,11 @@ window.addEventListener("load", () => {
         product.title.toLowerCase().includes(query) ||
         product.category.toLowerCase().includes(query)
       );
+      if (filteredProducts.length === 0) {
+        // If no products match the search query, display error message html element
+        document.getElementById("error-message-container").style.display = "block";
+        document.getElementById("error-message").textContent = "No products found matching your search.";
+      }
     } else {
       // If query is empty, show all products
       filteredProducts = products;

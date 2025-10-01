@@ -79,7 +79,14 @@ async function updateUser(event) {
             })
         })
         if(!response.ok){
-            throw new Error("Update failed!");
+            // clear input fields
+            document.getElementById("current-password").value = "";
+            document.getElementById("new-password").value = "";
+            // If the response is not ok, fill the error message html element with the error message from the response
+            const errorText = await response.text();
+            document.getElementById("error-message-container").style.display = "block";
+            document.getElementById("error-message").textContent = errorText;
+            return;
         }
         // If update is successful, display a success alert
         alert("Password updated successfully");

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,25 +39,42 @@
                     </div>
                     <p>Shop</p>
                 </a>
-                <a href="/products" class="side-menu-content-container add-product-button">
+                <a href="/products" class="side-menu-content-container add-product-button" sec:authorize="hasRole('ADMIN')">
                     <div class="icon-container">
                         <img src="images/inventory-icon.png" alt="">
                     </div>
                     <p>Add Product</p>
                 </a>
-                <a href="/cart" class="side-menu-content-container">
+                <a href="/cart" class="side-menu-content-container" sec:authorize="isAuthenticated()">
                     <div class="icon-container">
                         <img src="images/cart.png" alt="">
                     </div>
                     <p>Cart</p>
                 </a>
-                <a href="/logout"
-                   class="side-menu-content-container"
-                   id="side-menu-logout-login-button">
+                <!-- Show Logout button only if user is authenticated -->
+                <a
+                        href="/logout"
+                        class="side-menu-content-container"
+                        aria-label="Logout"
+                        id="nav-logout-login-button"
+                        sec:authorize="isAuthenticated()"
+                >
                     <div class="icon-container">
                         <img src="images/logout-icon.png" alt="">
                     </div>
-                    <p id="side-menu-logout-login-text">Logout</p>
+                    <p id="nav-logout-login-text">Logout</p>
+                </a>
+                <!-- Show Login button only if user is NOT authenticated -->
+                <a
+                        href="/login"
+                        class="side-menu-content-container"
+                        aria-label="Login"
+                        sec:authorize="!isAuthenticated()"
+                >
+                    <div class="icon-container">
+                        <img src="images/logout-icon.png" alt="">
+                    </div>
+                    <p>Login</p>
                 </a>
             </div>
         </div>
@@ -69,6 +86,9 @@
     <main id="registerContainer" class="register-container">
       <section class="register-card">
         <h2>Create An Account</h2>
+        <div id="error-invalid-cosntainer">
+          <p id="error-message-invalid"></p>
+        </div>
         <form id="registerForm" onsubmit="registerUser(event)" novalidate>
           <div class="form-group">
             <label for="username">Username</label>

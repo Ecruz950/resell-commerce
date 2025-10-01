@@ -88,8 +88,15 @@ async function registerUser(event) {
             })
         })
         if(!response.ok){
+            // Clear input fields
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("confirm-password").value = "";
+            // If the response is not ok, fill the error message html element with the error message from the response
             const errorMessage = await response.text();
-            throw new Error(errorMessage);
+            document.getElementById("error-invalid-container").style.display = "block";
+            document.getElementById("error-message-invalid").textContent = errorMessage;
+            return;
         }
         // If registration is successful, display a success alert and redirect the user to the login page
         alert("Registration successful");

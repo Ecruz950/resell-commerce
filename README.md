@@ -2,6 +2,7 @@
 
 A full-stack e-commerce web application built with Spring Boot and MySQL, featuring product management, user authentication, and shopping cart functionality.
 
+---
 ## Features
 
 - **Product Management**: Browse, add, edit, and delete products
@@ -10,7 +11,7 @@ A full-stack e-commerce web application built with Spring Boot and MySQL, featur
 - **Responsive Design**: Mobile-friendly interface with hamburger menu
 - **Category Filtering**: Products organized by categories (Men's Clothing, Women's Clothing, Electronics, Jewelry)
 - **Product Ratings**: Display and manage product ratings and reviews
-
+---
 ## Tech Stack
 
 - **Backend**: Spring Boot 3.5.5, Java 24
@@ -19,7 +20,31 @@ A full-stack e-commerce web application built with Spring Boot and MySQL, featur
 - **Template Engine**: Thymeleaf
 - **Build Tool**: Maven
 - **ORM**: Spring Data JPA (Hibernate)
+---
 
+## Screenshots
+### Home Page
+#### User View
+![Home Page](readme-assets/product_page01.png)
+#### Logged-in User View
+![Home Page](readme-assets/user_product_page.png)
+#### Admin User View
+![Home Page](readme-assets/product_page02.png)
+![Home Page](readme-assets/admin_product_page.png)
+#### Search Functionality
+![Home Page](readme-assets/product_page04.png)
+### Product Page
+![Product Page](readme-assets/product_details_page.png)
+### Cart Page
+![Cart Page](readme-assets/cart_page.png)
+### User Profile Page
+![User Profile Page](readme-assets/user_profile_page.png)
+### User Registration
+![User Registration](readme-assets/registration_page.png)
+### User Login
+![User Login](readme-assets/login_page.png)
+
+---
 ## Project Structure
 
 ```
@@ -36,12 +61,14 @@ resell-ecommerce/
 └── ecommerce_database.sql
 ```
 
+---
 ## Prerequisites
 
 - Java 24 or higher
 - MySQL 8.0 or higher
 - Maven 3.6 or higher
 
+---
 ## Setup Instructions
 
 ### 1. Clone the Repository
@@ -78,6 +105,7 @@ mvn spring-boot:run
 
 The application will be available at `http://localhost:8080`
 
+---
 ## API Endpoints
 
 ### Products
@@ -97,6 +125,7 @@ The application will be available at `http://localhost:8080`
 - `POST /api/cart` - Add item to cart
 - `DELETE /api/cart/{id}` - Remove item from cart
 
+---
 ## Database Schema
 
 ### Products Table

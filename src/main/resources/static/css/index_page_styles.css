@@ -387,3 +387,12 @@ header .button:hover {
     padding: 5px 12px;
   }
 }
+#error-message-container {
+  display: none;
+  margin: 10px;
+  padding: 5px;
+  background-color: #FFE6E6;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-align: center;
+}

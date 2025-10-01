@@ -25,7 +25,7 @@ public class UserService {
 	}
 
     public User createUser(User user) {
-        System.out.println("Does username exist? " + userRepository.findByUsername(user.getUsername().toLowerCase()).isPresent());
+        // System.out.println("Does username exist? " + userRepository.findByUsername(user.getUsername().toLowerCase()).isPresent());
         if (userRepository.findByUsername(user.getUsername().toLowerCase()).isPresent()) {
             // logger.error("Username already exists: {}", user.getUsername());
             throw new RuntimeException("Username already exists");
