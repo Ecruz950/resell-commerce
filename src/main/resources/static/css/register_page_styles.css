@@ -122,7 +122,7 @@ header .button:hover {
   background-color: #0078cc;
 }
 /* Error message styling */
-#error-message-user, #error-message-pass, #error-message-confirm {
+#error-message-user, #error-message-email, #error-message-pass, #error-message-confirm {
   display: none;
   color: red;
   margin: 5px 0px 0px 0px;

@@ -26,9 +26,13 @@ public class UserService {
 
     public User createUser(User user) {
         // System.out.println("Does username exist? " + userRepository.findByUsername(user.getUsername().toLowerCase()).isPresent());
+        System.out.println("Does email exist? " + userRepository.findByEmail(user.getEmail().toLowerCase()).isPresent());
         if (userRepository.findByUsername(user.getUsername().toLowerCase()).isPresent()) {
             // logger.error("Username already exists: {}", user.getUsername());
             throw new RuntimeException("Username already exists");
+        } else if (userRepository.findByEmail(user.getEmail().toLowerCase()).isPresent()) {
+            // logger.error("Email already exists: {}", user.getEmail());
+            throw new RuntimeException("Email already exists");
         }
         if (user.getRole() == null || user.getRole().isBlank()) {
             user.setRole("USER"); // Keep in mind Spring Security conventions uses "ROLE_USER"

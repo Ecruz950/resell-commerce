@@ -16,12 +16,16 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 
+    @Column(unique = true)
+    private String email;
+
 	private String role;
 
 	public User() {
 	}
 
-	public User(String username, String password, String role) {
+	public User(String username, String password, String role, String email) {
+        this.email = email;
 		this.username = username;
 		this.password = password;
 		this.role = role;
@@ -51,6 +55,10 @@ public class User {
 		this.password = password;
 	}
 
+    public String getEmail() {return email;}
+
+    public void setEmail(String email) {this.email = email;}
+
 	public String getRole() {
 		return role;
 	}
@@ -64,12 +72,12 @@ public class User {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		User user = (User) o;
-		return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && role == user.role;
+		return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && role == user.role;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, username, password, role);
+		return Objects.hash(id, username, password, email, role);
 	}
 
 	@Override
@@ -78,6 +86,7 @@ public class User {
 				"id=" + id +
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
+                ", email='" + email + '\'' +
 				", role=" + role +
 				'}';
 	}

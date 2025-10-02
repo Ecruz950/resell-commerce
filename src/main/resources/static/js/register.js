@@ -39,13 +39,14 @@ function validatePasswordMatch() {
 async function registerUser(event) {
     // Use event.preventDefault() to prevent the default action from being executed
     event.preventDefault();
-    // Inside the registerUser() function, retrieve the form values: username, password, and confirmPassword
+    // Inside the registerUser() function, retrieve the form values: username, email, password, and confirmPassword
     var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var confirmPassword = document.getElementById("confirm-password").value;
 
     // Make sure username and password are not empty
-    if(!username || !password || !confirmPassword){
+    if(!username || !email || !password || !confirmPassword){
         if(!username){
         // error message element
             const userErrorMessageElement = document.getElementById("error-message-user");
@@ -53,6 +54,12 @@ async function registerUser(event) {
             // Change input border color to red
             const userInputElement = document.getElementById("username");
             userInputElement.style.borderColor = "red";}
+        if(!email){
+            const emailErrorMessageElement = document.getElementById("error-message-email");
+            emailErrorMessageElement.style.display = "inline";
+            const emailInputElement = document.getElementById("email");
+            emailInputElement.style.borderColor = "red";
+        }
         if(!password){
         // error message element
             const passErrorMessageElement = document.getElementById("error-message-pass");
@@ -83,6 +90,7 @@ async function registerUser(event) {
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify({
                 username,
+                email,
                 password,
                 role: "USER"
             })
@@ -90,10 +98,12 @@ async function registerUser(event) {
         if(!response.ok){
             // Clear input fields
             document.getElementById("username").value = "";
+            document.getElementById("email").value = "";
             document.getElementById("password").value = "";
             document.getElementById("confirm-password").value = "";
             // If the response is not ok, fill the error message html element with the error message from the response
             const errorMessage = await response.text();
+            console.log(errorMessage);
             document.getElementById("error-invalid-container").style.display = "block";
             document.getElementById("error-message-invalid").textContent = errorMessage;
             return;
