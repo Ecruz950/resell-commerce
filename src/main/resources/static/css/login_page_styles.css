@@ -105,11 +105,11 @@ header .button:hover {
   font-weight: bold;
   transition: background-color 0.3s;
 }
-
 #loginButton:hover {
   background-color: #0078cc;
 }
 
+/* Error message styling */
 #error-message-user, #error-message-pass {
   display: none;
   color: red;

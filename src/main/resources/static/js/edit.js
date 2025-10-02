@@ -2,10 +2,6 @@ const PRODUCTS_API_URL = "http://localhost:8080/api/v1/products";
 const productId = new URLSearchParams(window.location.search).get("id");
 
 window.addEventListener("load", () => {
-    // Display the username in the navbar
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    document.getElementById("username-display").textContent = user.username;
-
     if (productId) fetchProductForEdit(productId);
 
     document.getElementById("editProductForm").addEventListener("submit", event => {
@@ -54,13 +50,24 @@ async function updateProduct(productId) {
         const response = await fetch(`${PRODUCTS_API_URL}/${productId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
             body: JSON.stringify(updatedProduct)
         });
-        if (!response.ok) throw new Error("Error updating product");
-
-        alert("Product updated successfully");
-        window.location.href = `product.html?id=${productId}`;
+        
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+        
+        // Check for both 200 (OK) and 204 (No Content) as success
+        if (response.ok || response.status === 204) {
+            alert("Product updated successfully");
+            window.location.href = `/product?id=${productId}`;
+        } else {
+            const errorText = await response.text();
+            console.log('Error response:', errorText);
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
     } catch (error) {
-        alert("Error updating product in API");
+        console.error('Update error:', error);
+        alert(`Error updating product: ${error.message}`);
     }
 }

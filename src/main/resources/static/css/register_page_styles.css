@@ -121,14 +121,23 @@ header .button:hover {
 #registerButton:hover {
   background-color: #0078cc;
 }
-
-#error-message-user, #error-message-pass, #error-message-confirm {
+/* Error message styling */
+#error-message-user, #error-message-email, #error-message-pass, #error-message-confirm {
   display: none;
   color: red;
   margin: 5px 0px 0px 0px;
   font-size: 0.7rem;
 }
 
+#error-invalid-container {
+  display: none;
+  margin: 10px 0px 10px 0px;
+  padding: 5px;
+  background-color: #FFE6E6;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-align: center;
+}
 
 /* Hamburger Menu styling */
 .hamburger-menu-container {

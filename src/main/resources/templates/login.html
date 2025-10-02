@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,19 +33,19 @@
             </div>
             <!-- Menu navigation links -->
             <div class="side-menu-content">
-                <a href="/index.html" class="side-menu-content-container">
+                <a href="/" class="side-menu-content-container">
                     <div class="icon-container">
                         <img src="images/clothes-icon.png" alt="">
                     </div>
                     <p>Shop</p>
                 </a>
-                <a href="/add.html" class="side-menu-content-container add-product-button">
+                <a href="/products" class="side-menu-content-container add-product-button" sec:authorize="hasRole('ADMIN')">
                     <div class="icon-container">
                         <img src="images/inventory-icon.png" alt="">
                     </div>
                     <p>Add Product</p>
                 </a>
-                <a href="/cart.html" class="side-menu-content-container">
+                <a href="/cart" class="side-menu-content-container" sec:authorize="isAuthenticated()">
                     <div class="icon-container">
                         <img src="images/cart.png" alt="">
                     </div>
@@ -54,7 +54,7 @@
             </div>
         </div>
       <nav>
-        <h1><a href="/index.html">Eddy's Market | Login</a></h1>
+        <h1><a href="/">Eddy's Market | Login</a></h1>
       </nav>
     </header>
 
@@ -62,20 +62,20 @@
       <section class="login-card">
         <h2>Welcome</h2>
         <h3>Sign in to your account.</h3>
-        <div id="error-invalid-container">
+        <div id="error-invalid-container" th:if="${param.error}" style="display: block;">
             <p id="error-message-invalid">That username and password combination didn't work. Try again.</p>
         </div>
-        <form id="loginForm" novalidate>
+        <form action="/login" method="post" id="loginForm">
           <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required />
+            <input type="text" id="username" name="username" />
             <p id="error-message-user">Username is required</p>
           </div>
 
           <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
-              <p id="error-message-pass">Password is required</p>
+            <input type="password" id="password" name="password" />
+            <p id="error-message-pass">Password is required</p>
           </div>
 
           <div class="form-group">
@@ -84,7 +84,7 @@
 
           <hr />
 
-          <p>New User? Register <a href="/register.html">here</a></p>
+          <p>New User? Register <a href="/register">here</a></p>
         </form>
       </section>
     </main>

@@ -20,6 +20,28 @@ A full-stack e-commerce web application built with Spring Boot and MySQL, featur
 - **Build Tool**: Maven
 - **ORM**: Spring Data JPA (Hibernate)
 
+## Screenshots
+### Home Page
+#### User View
+![Home Page](readme-assets/product_page01.png)
+#### Logged-in User View
+![Home Page](readme-assets/user_product_page.png)
+#### Admin User View
+![Home Page](readme-assets/product_page02.png)
+![Home Page](readme-assets/admin_product_page.png)
+#### Search Functionality
+![Home Page](readme-assets/product_page04.png)
+### Product Page
+![Product Page](readme-assets/product_details_page.png)
+### Cart Page
+![Cart Page](readme-assets/cart_page.png)
+### User Profile Page
+![User Profile Page](readme-assets/user_profile_page.png)
+### User Registration
+![User Registration](readme-assets/Registration_page.png)
+### User Login
+![User Login](readme-assets/login_page.png)
+
 ## Project Structure
 
 ```

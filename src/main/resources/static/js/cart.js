@@ -1,22 +1,21 @@
 const CART_API_URL = "http://localhost:8080/api/v1/cart";
 const PRODUCTS_API_URL = "http://localhost:8080/api/v1/products";
 
-// Check if the user is logged in and show "Add Product" button if the user is an admin
-function showAddProductButton() {
-    const navButton = document.getElementById("add-product-button");
-    if (navButton) {
-        navButton.style.display = isAdminLoggedIn() ? "inline" : "none";
-    }
-}
-
 // Fetch cart items for the logged-in user
 async function fetchCartItems() {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const userId = user ? user.userID : null;
-
-    if (!userId) {
-        // alert("User not logged in");
-        // window.location.href = "login.html";
+    let userId;
+    try {
+        const authResponse = await fetch('/api/auth/status');
+        const authData = await authResponse.json();
+        
+        if (!authData.authenticated) {
+            window.location.href = '/login';
+            return;
+        }
+        
+        userId = authData.userId;
+    } catch (error) {
+        window.location.href = '/login';
         return;
     }
 
@@ -85,12 +84,21 @@ function renderCartItems(cartItems) {
 }
 
 async function removeFromCart(productId) {
-    // In removeFromCart, retrieve the userID from sessionStorage using JSON.parse(sessionStorage.getItem("user"))
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    const userId = user.userID;
-
-    if (!userId) {
-        alert("User not logged in");
+    let userId;
+    try {
+        const authResponse = await fetch('/api/auth/status');
+        const authData = await authResponse.json();
+        
+        if (!authData.authenticated) {
+            alert('Please log in to remove items from cart');
+            window.location.href = '/login';
+            return;
+        }
+        
+        userId = authData.userId;
+    } catch (error) {
+        alert('Please log in to remove items from cart');
+        window.location.href = '/login';
         return;
     }
 
@@ -117,8 +125,6 @@ async function removeFromCart(productId) {
 
 // Initialize the cart page
 window.addEventListener("load", () => {
-    // Show "Add Product" button if the user is an admin
-    showAddProductButton();
     // Fetch and display cart items
     fetchCartItems();
 });

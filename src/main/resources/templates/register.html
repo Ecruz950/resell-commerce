@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,49 +33,73 @@
             </div>
             <!-- Menu navigation links -->
             <div class="side-menu-content">
-                <a href="/index.html" class="side-menu-content-container">
+                <a href="/" class="side-menu-content-container">
                     <div class="icon-container">
                         <img src="images/clothes-icon.png" alt="">
                     </div>
                     <p>Shop</p>
                 </a>
-                <a href="/add.html" class="side-menu-content-container add-product-button">
+                <a href="/products" class="side-menu-content-container add-product-button" sec:authorize="hasRole('ADMIN')">
                     <div class="icon-container">
                         <img src="images/inventory-icon.png" alt="">
                     </div>
                     <p>Add Product</p>
                 </a>
-                <a href="/cart.html" class="side-menu-content-container">
+                <a href="/cart" class="side-menu-content-container" sec:authorize="isAuthenticated()">
                     <div class="icon-container">
                         <img src="images/cart.png" alt="">
                     </div>
                     <p>Cart</p>
                 </a>
-                <a href="/login.html"
-                   class="side-menu-content-container"
-                   id="side-menu-logout-login-button">
+                <!-- Show Logout button only if user is authenticated -->
+                <a
+                        href="/logout"
+                        class="side-menu-content-container"
+                        aria-label="Logout"
+                        id="nav-logout-login-button"
+                        sec:authorize="isAuthenticated()"
+                >
                     <div class="icon-container">
                         <img src="images/logout-icon.png" alt="">
                     </div>
-                    <p id="side-menu-logout-login-text">Logout</p>
+                    <p id="nav-logout-login-text">Logout</p>
+                </a>
+                <!-- Show Login button only if user is NOT authenticated -->
+                <a
+                        href="/login"
+                        class="side-menu-content-container"
+                        aria-label="Login"
+                        sec:authorize="!isAuthenticated()"
+                >
+                    <div class="icon-container">
+                        <img src="images/logout-icon.png" alt="">
+                    </div>
+                    <p>Login</p>
                 </a>
             </div>
         </div>
       <nav>
-        <h1><a href="/index.html">Eddy's Market | Registration</a></h1>
+        <h1><a href="/">Eddy's Market | Registration</a></h1>
       </nav>
     </header>
 
     <main id="registerContainer" class="register-container">
       <section class="register-card">
         <h2>Create An Account</h2>
+        <div id="error-invalid-container">
+          <p id="error-message-invalid"></p>
+        </div>
         <form id="registerForm" onsubmit="registerUser(event)" novalidate>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" required />
+            <input type="text" id="username" name="username" />
               <p id="error-message-user">Username is required</p>
           </div>
-
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" />
+            <p id="error-message-email">Email is required</p>
+          </div>
           <div class="form-group">
             <label for="password">
                 Password
@@ -83,7 +107,7 @@
                     <img src="images/opened-eye.png" alt="eye icon" id="eye-icon-pass-img"/>
                 </span>
             </label>
-              <input type="password" id="password" name="password" required />
+              <input type="password" id="password" name="password" />
               <p id="error-message-pass">Password is required</p>
           </div>
 
@@ -99,7 +123,6 @@
                 id="confirm-password"
                 name="confirm-password"
                 oninput="validatePasswordMatch()"
-                required
               />
               <p id="error-message-confirm">Passwords do not match</p>
           </div>
@@ -110,7 +133,7 @@
 
           <hr />
 
-          <p>Existing User? Login <a href="/login.html">here</a></p>
+          <p>Existing User? Login <a href="/login">here</a></p>
         </form>
       </section>
     </main>

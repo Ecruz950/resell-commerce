@@ -4,8 +4,24 @@ let products = [];
 let filteredProducts = []; // Add this to store filtered products
 
 async function addToCart(productId) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
-  const userId = user.userID;
+  // Check if user is logged in and get user ID from Spring Security
+  let userId;
+  try {
+    const authResponse = await fetch('/api/auth/status');
+    const authData = await authResponse.json();
+    
+    if (!authData.authenticated) {
+      alert('Please log in to add items to cart');
+      window.location.href = '/login';
+      return;
+    }
+    
+    userId = authData.userId;
+  } catch (error) {
+    alert('Please log in to add items to cart');
+    window.location.href = '/login';
+    return;
+  }
 
   const cart = {
     userId: userId,
@@ -39,6 +55,7 @@ window.addEventListener("load", () => {
   // Add an event listener to the searchForm to handle form submissions. Prevent the default submission behavior
   document.getElementById("searchForm").addEventListener("submit", (event) => {
     event.preventDefault();
+    document.getElementById("error-message-container").style.display = "none"; // Hide error message container on new search
 
     // Retrieve the search query from the searchInput field, and convert it to lowercase for a case-insensitive search
     const query = document.getElementById("searchInput").value.trim().toLowerCase();
@@ -49,6 +66,11 @@ window.addEventListener("load", () => {
         product.title.toLowerCase().includes(query) ||
         product.category.toLowerCase().includes(query)
       );
+      if (filteredProducts.length === 0) {
+        // If no products match the search query, display error message html element
+        document.getElementById("error-message-container").style.display = "block";
+        document.getElementById("error-message").textContent = "No products found matching your search.";
+      }
     } else {
       // If query is empty, show all products
       filteredProducts = products;
@@ -77,7 +99,7 @@ function renderProducts(productList = products) {
   const container = document.getElementById("productContainer");
   container.innerHTML = productList.map(product => `
       <div class="product-card">
-        <a href="product.html?id=${product.id}">
+        <a href="/product?id=${product.id}">
           <img src="${product.image}" alt="${product.title}" />
           <p>${product.title}</p>
         </a>
